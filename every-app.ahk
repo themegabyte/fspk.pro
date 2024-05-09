@@ -24,7 +24,7 @@ SetKeyDelay(, , "Play") ; Same as above but for keyboard
 mouseSpeed := 30 ; the mouse moving speed when AHK executes a MouseMove function.
 ; mouse movement speed controls, a Random function will be called with the below two variables as extremes.
 lowestSpeed := 10
-highestSpeed := 30
+highestSpeed := 20
 ;
 ;
 Hotkey toggleKey, Main
@@ -32,9 +32,9 @@ Hotkey toggleKey, Main
 Main(ThisHotkey) {
     Static on := False
     if (!on) {
+        TrayTip("Script started!", A_ScriptName)
         ClickNext()
         SetTimer(ClickNext, clickDelayms * on := !on)
-        TrayTip("Script started!", A_ScriptName)
     } else {
         SetTimer(ClickNext, clickDelayms * on := !on)
         TrayTip("Script Stopped!", A_ScriptName)
