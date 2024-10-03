@@ -8,13 +8,20 @@ Esc:: ExitApp ; Hotkey to exit script
 
 ;Parameters section - Basic
 ; Key to toggle script
-global toggleKey := "F8"
-; From Window Spy (screen): 1097, 774
-every_forward_button_x_position := 1097
-every_forward_button_y_position := 774
+global toggleKey := IniRead("config.ini", "common", "toggleKey")
+; From Window Spy (screen): 1097, 794
+every_forward_button_x_position := IniRead("config.ini", "every-app-ahk", "EveryForwardButtonXPosition")
+every_forward_button_y_position := IniRead("config.ini", "every-app-ahk", "EveryForwardButtonYPosition")
 ; Display resolution. Must be updated if you change display scaling or resolution.
-display_resolution_width := 1920
-display_resolution_height := 1080
+display_resolution_width := IniRead("config.ini", "common", "DisplayResolutionWidth") || "1920"
+display_resolution_height := IniRead("config.ini", "common", "DisplayResolutionHeight") || "1080"
+
+if(!every_forward_button_x_position) {
+    throw ValueError("EveryForwardButtonXPosition is unset in config.ini")
+}
+if(!every_forward_button_y_position) {
+    throw ValueError("EveryForwardButtonYPosition is unset in config.ini")
+}
 
 
 ;Parameters section - Advanced
